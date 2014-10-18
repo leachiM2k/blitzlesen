@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <title>Blitzlesen</title>
+    <link rel="stylesheet" href="blitzlesen.css"/>
+    <script src="lib/jquery.min.js"></script>
+    <script src="blitzlesen.js"></script>
+  </head>
+  <body>
+    <div id="content">
+      <div id="login">
+        <form>
+          <label>Dein Name (wenn Du magst):<input name="name"/></label><br/>
+          <button type="submit" id="start">Los gehts!</button>
+        </form>
+      </div>
+      <div id="spiel">
+        <div id="wort">Würstchen</div>
+      </div>
+      <div id="ergebnis">
+        <span id="gelesene-worte">?</span>
+        <br/>
+        <form>
+          <button type="submit" id="neu">Noch mal!</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
