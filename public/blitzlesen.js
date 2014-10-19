@@ -28,9 +28,9 @@ function vorbereitung () {
             kategorien.push(kategorie);
         }
         kategorien.sort();
-        $('#kategorie').empty();
+        $('#kategorien').empty();
         kategorien.forEach(function (kategorie) {
-            $('#kategorie').append("<option>" + kategorie + "</option>");
+            $('#kategorien').append("<option>" + kategorie + "</option>");
         });
         zeige('auswahl');
     });

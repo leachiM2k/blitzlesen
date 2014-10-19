@@ -1,11 +1,16 @@
-*, option {
+*, select optgroup option {
     font-size: 40pt;
     font-family: Helvetica; Arial; sans serif;
+    -webkit-appearance: none;
 }
 
 button {
     margin-top: 0.5em;
     text-align: center;
+}
+
+.titel {
+    font-size: 200%;
 }
 
 #content div {
@@ -15,6 +20,7 @@ button {
 
 #wort {
     width: 20em;
+    font-size: 180%;
     text-align: center;
 }
 
