@@ -1,15 +1,53 @@
-var dauer = 5000;
+var dauer = 60000;
 var geraten = 0;
 
-var wörter = ['Hund', 'Katze', 'Maus', 'Dackel', 'Frosch', 'Huhn', 'Pferd', 'Gans', 'Papagei', 'Lachs', 'Schlange',
-              'Hamster', 'Esel', 'Biene', 'Delfin', 'Fliege', 'Kuh', 'Skorpion', 'Schwan', 'Bär', 'Ziege', 'Tiger',
-              'Pinguin', 'Leopard', 'Specht'];
+var wortlisten;
+var wörter;
+
+function zeige(seite) {
+    $('#content').off('click keydown');
+    $('#content > div').each(function () {
+        if (this.id == seite) {
+            $(this)
+                .css('display', 'inherit')
+                .css('position', 'absolute')
+                .css("left", $(window).width() / 2 - $(this).width() / 2 + "px")
+                .css("top", $(window).height() / 2 - $(this).height() / 2 + "px");
+        } else {
+            $(this).css('display', 'none');
+        }
+    });
+}
+
+function vorbereitung () {
+    zeige('vorbereitung');
+    $.getJSON('/wortlisten', function (data) {
+        wortlisten = data;
+        kategorien = [];
+        for (kategorie in wortlisten) {
+            kategorien.push(kategorie);
+        }
+        kategorien.sort();
+        $('#kategorie').empty();
+        kategorien.forEach(function (kategorie) {
+            $('#kategorie').append("<option>" + kategorie + "</option>");
+        });
+        zeige('auswahl');
+    });
+}
 
 function spielStart () {
-    $('#login').css('display', 'none');
-    $('#spiel').css('display', 'inherit')
+    zeige('spiel');
+    wörter = wortlisten[$('#kategorie').val()];
     geraten = 0;
     nächstesWort();
+    $('#content')
+        .on('click keydown', function () {
+            geraten = geraten + 1;
+            nächstesWort();
+            return false;
+        })
+        .focus();
     setTimeout(spielEnde, dauer);
     return false;
 }
@@ -29,7 +67,6 @@ function nächstesWort () {
 }    
 
 function spielEnde() {
-    $('#spiel').css('display', 'none');
     var text;
     switch (geraten) {
     case 0:
@@ -40,23 +77,28 @@ function spielEnde() {
         text = geraten + " gelesene Wörter!";
     }
     $('#gelesene-worte').html(text);
-    $('#ergebnis').css('display', 'inherit');
+    zeige('ergebnis');
     setTimeout(function () {
         $('#neu').css('display', 'inline-block');
     }, 2000);
 }
 
 $(document).ready(function () {
-    $('#login form').on('submit', spielStart);
-    $('#spiel').on('click', function () {
-        geraten = geraten + 1;
-        nächstesWort();
-        return false;
-    });
+
+    function maximize() {
+        $('#content')
+            .width($(window).width())
+            .height($(window).height());
+    }
+
+    $(window).on('resize', maximize);
+    maximize();
+
+    $('#auswahl form').on('submit', spielStart);
     $('#neu').on('click', function () {
         $('#neu').css('display', 'none');
-        $('#ergebnis').css('display', 'none');
-        $('#login').css('display', 'inherit');
+        vorbereitung();
         return false;
     });
+    vorbereitung();
 });

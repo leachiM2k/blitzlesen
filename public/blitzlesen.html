@@ -2,15 +2,21 @@
 <html lang="de">
   <head>
     <title>Blitzlesen</title>
+    <link rel="stylesheet" href="lib/normalize.css"/>
     <link rel="stylesheet" href="blitzlesen.css"/>
     <script src="lib/jquery.min.js"></script>
     <script src="blitzlesen.js"></script>
   </head>
   <body>
-    <div id="content">
-      <div id="login">
+    <div id="content" tabindex="0">
+      <div id="vorbereitung">
+        <p>Blitzlesen...</p>
+        <p>Wortlisten werden geladen</p>
+      </div>
+      <div id="auswahl">
+        <p>Blitzlesen...</p>
         <form>
-          <label>Dein Name (wenn Du magst):<input name="name"/></label><br/>
+          <select id="kategorie"></select><br/>
           <button type="submit" id="start">Los gehts!</button>
         </form>
       </div>

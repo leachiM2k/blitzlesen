@@ -7,8 +7,19 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-        "express": "*",
-        "express-notemplate": "*"
+        "google-spreadsheet": "*",
+        "body-parser": "^1.5.2",
+        "errorhandler": "^1.1.1",
+        "express": "^4.8.0",
+        "jade": "^1.5.0",
+        "method-override": "^2.1.2",
+        "morgan": "^1.2.2",
+        "multer": "^0.1.3",
+        "serve-favicon": "^2.0.1",
+        "cookie-parser": "*",
+        "express-notemplate": "*",
+        "knuth-shuffle": "*",
+        "normalize.css": "*"
     },
     "repository": {
         "type": "git",
