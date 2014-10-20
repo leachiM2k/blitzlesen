@@ -16,7 +16,7 @@ var sheetKey = '1bAPNRFjr83ghmxtIyldtlXJZrNYoQcw1KgsDprbWowM';
 
 var wordlists = {};
 
-function loadWords(mischen, handler)
+function loadWords(handler)
 {
     var workbook = new GoogleSpreadsheet(sheetKey);
     workbook.getInfo(function (err, info) {
