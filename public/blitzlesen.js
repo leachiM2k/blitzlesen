@@ -38,7 +38,10 @@ function vorbereitung () {
 
 function spielStart () {
     zeige('spiel');
-    wörter = wortlisten[$('#kategorie').val()];
+    wörter = wortlisten[$('#kategorie').val()].slice(0);
+    if ($('#mischen:checked').val()) {
+        knuthShuffle(wörter);
+    }
     geraten = 0;
     nächstesWort();
     $('#content')

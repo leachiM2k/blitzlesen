@@ -28,21 +28,17 @@ function loadWords(mischen, handler)
         function getSheet(sheetNo) {
             var sheet = info.worksheets[sheetNo];
             sheet.getRows(function (err, rows) {
-                              if (err) {
-                                  handler(err);
-                                  return;
-                              }
-                              sheets[sheet.title] = rows.map(function (row) { return row.title; });
-                              console.log
-                              if (mischen == 1) {
-                                  shuffle(sheets[sheet.title]);
-                              }
-                              if (sheetNo == info.worksheets.length - 1) {
-                                  handler(null, sheets);
-                              } else {
-                                  getSheet(sheetNo + 1);
-                              }
-                          });
+                if (err) {
+                    handler(err);
+                    return;
+                }
+                sheets[sheet.title] = rows.map(function (row) { return row.title; });
+                if (sheetNo == info.worksheets.length - 1) {
+                    handler(null, sheets);
+                } else {
+                    getSheet(sheetNo + 1);
+                }
+            });
         }
         getSheet(0);
     });
@@ -66,7 +62,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/wortlisten', function (req, res) {
-    loadWords(req.param('mischen'), function (err, data) {
+    loadWords(function (err, data) {
         if (err) {
             res.send(500, err);
         } else {
