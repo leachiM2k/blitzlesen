@@ -59,7 +59,7 @@ function nächstesWort () {
         clearTimeout(wortTimeout);
     }
     $('#wort')
-        .html(wörter.pop())
+        .html(wörter.shift())
         .css('color', 'black');
     wortTimeout = setTimeout(function () {
         $('#wort').css('color', 'white');
