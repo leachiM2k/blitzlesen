@@ -6,7 +6,6 @@ var http = require('http');
 var express = require('express');
 var logger = require('morgan');
 var methodOverride = require('method-override');
-var multer = require('multer');
 var errorHandler = require('errorhandler');
 var cookieParser = require('cookie-parser');
 var notemplate = require('express-notemplate');
@@ -17,7 +16,7 @@ var sheetKey = '1bAPNRFjr83ghmxtIyldtlXJZrNYoQcw1KgsDprbWowM';
 
 var wordlists = {};
 
-function loadWords(handler)
+function loadWords(mischen, handler)
 {
     var workbook = new GoogleSpreadsheet(sheetKey);
     workbook.getInfo(function (err, info) {
@@ -29,18 +28,21 @@ function loadWords(handler)
         function getSheet(sheetNo) {
             var sheet = info.worksheets[sheetNo];
             sheet.getRows(function (err, rows) {
-                if (err) {
-                    handler(err);
-                    return;
-                }
-                sheets[sheet.title] = rows.map(function (row) { return row.title; });
-                shuffle(sheets[sheet.title]);
-                if (sheetNo == info.worksheets.length - 1) {
-                    handler(null, sheets);
-                } else {
-                    getSheet(sheetNo + 1);
-                }
-            });
+                              if (err) {
+                                  handler(err);
+                                  return;
+                              }
+                              sheets[sheet.title] = rows.map(function (row) { return row.title; });
+                              console.log
+                              if (mischen == 1) {
+                                  shuffle(sheets[sheet.title]);
+                              }
+                              if (sheetNo == info.worksheets.length - 1) {
+                                  handler(null, sheets);
+                              } else {
+                                  getSheet(sheetNo + 1);
+                              }
+                          });
         }
         getSheet(0);
     });
@@ -64,7 +66,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/wortlisten', function (req, res) {
-    loadWords(function (err, data) {
+    loadWords(req.param('mischen'), function (err, data) {
         if (err) {
             res.send(500, err);
         } else {
