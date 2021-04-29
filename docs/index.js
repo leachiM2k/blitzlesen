@@ -35,7 +35,7 @@ function show(seite) {
 
 function prepare() {
     show('vorbereitung');
-    $.getJSON('/wordlists', function (data) {
+    $.getJSON('./wordlists', function (data) {
         wordlists = data;
         categories = [];
         for (category in wordlists) {
