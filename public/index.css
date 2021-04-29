@@ -1,7 +1,17 @@
+body {
+    font-size: 40px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+/*
 *, select optgroup option {
     -webkit-appearance: none;
     font-size: 40pt;
     font-family: Helvetica; Arial; sans serif;
+}
+*/
+
+.settingsForm {
+    font-size: 20px;
 }
 
 button {
@@ -43,3 +53,27 @@ input[type=checkbox] {
 #auswahl, #spiel, #ergebnis, #neu {
     display: none;
 }
+
+#progress {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+@keyframes fromzerotohero {
+  from {width: 0%;}
+  to {width: 100%;}
+}
+
+#progress .inner {
+    background: green;
+    height: 12px;
+    width: 0%;
+}
+
+#progress .inner.animation {
+  animation-name: fromzerotohero;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+}
+
