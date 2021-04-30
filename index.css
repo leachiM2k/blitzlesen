@@ -1,0 +1,58 @@
+body {
+    font-size: 40px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.settingsForm {
+    font-size: 20px;
+    line-height: 1.5em;
+}
+
+.settingsForm > div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.titel {
+    font-size: 200%;
+}
+
+#content div {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#wort {
+    width: 20em;
+    font-size: 180%;
+    text-align: center;
+}
+
+#auswahl, #spiel, #ergebnis, #neu {
+    display: none;
+}
+
+#progress {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+@keyframes fromzerotohero {
+  from {width: 0%;}
+  to {width: 100%;}
+}
+
+#progress .inner {
+    background: green;
+    height: 12px;
+    width: 0%;
+}
+
+#progress .inner.animation {
+  animation-name: fromzerotohero;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+}
+
